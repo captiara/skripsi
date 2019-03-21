@@ -30,6 +30,10 @@ clf.fit(X_train, y_train)
 clf_predictions = clf.predict(X_test)
 #clf.fit(R, y)
 #joblib.dump(clf, 'filename.pkl')
+
+@app.route('/',methods=['GET'])
+def home():
+    return 'helloworld'
 	
 @app.route('/api/train', methods=['POST'])
 def train():
@@ -152,4 +156,4 @@ def predict():
 
     # run web server
 if __name__=="__main__":
-    app.run(debug=True)
+    app.run(host = '0.0.0.0')
