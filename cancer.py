@@ -33,7 +33,7 @@ clf_predictions = clf.predict(X_test)
 
 @app.route('/',methods=['GET'])
 def home():
-    return 'helloworld'
+    return 'Tiara'
 	
 @app.route('/api/train', methods=['POST'])
 def train():
