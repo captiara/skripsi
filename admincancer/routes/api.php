@@ -20,6 +20,15 @@ Route::get('/prediksiurl','PrediksisController@datadisplayapi');
 Route::get('/prediksiurl/{id}','PrediksisController@showdataapi');
 Route::get('/pasienurl','PasiensController@dataapi');
 Route::get('/getdata','PrediksisController@postGuzzleRequest');
+Route::get('/category','CategoryController@list');
+Route::post('/login/pasien','PasiensController@loginPasien');
+Route::post('/register','PasiensController@registerPasien');
+Route::post('/login/dokter','DoktersController@loginDokter');
+Route::get('/dokter','DoktersController@list');
+Route::get('/pemeriksaan/{role}/{id}','PemeriksaansController@getData');
+Route::post('/appointment/make','PemeriksaansController@makeAppointment');
+Route::post('/appointment/do','PemeriksaansController@doAppointment');
+
 
 Route::group(['prefix' => 'states'], function()
 {

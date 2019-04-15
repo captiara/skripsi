@@ -9,15 +9,6 @@ use App\Category;
 
 class CategoryController extends Controller
 {
-     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -26,6 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         $categories = Category::paginate(8);
 
         return view('kategori-rs/index', ['categories' => $categories]);
@@ -38,9 +30,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->middleware('auth');
         return view('kategori-rs/create');
     }
-
+    public function list()
+    {
+        return Category::all();
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -49,6 +45,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->middleware('auth');
         $this->validateInput($request);
          Category::create([
             'name' => $request['name'],
@@ -77,6 +74,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->middleware('auth');
         $category = Category::find($id);
         // Redirect to country list if updating country wasn't existed
         if ($category == null || count($category) == 0) {
@@ -95,6 +93,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->middleware('auth');
         $category = Category::findOrFail($id);
         $input = [
             'name' => $request['name'],
@@ -117,6 +116,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->middleware('auth');
         Category::where('id', $id)->delete();
          return redirect()->intended('/category');
     }

@@ -15,16 +15,6 @@ class DoktersController extends Controller
      */
     protected $redirectTo = '/dokter-rs';
 
-         /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -32,11 +22,35 @@ class DoktersController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         $dokters = Dokter::paginate(5);
 
         return view('dokter-rs/index', ['dokters' => $dokters]);
     }
+    public function loginDokter(Request $request)
+    {
+        $data = $request->all();
 
+        $dokters= Dokter::select('*')->where('email',$data["email"])->where('password',$request["password"])->first();
+
+        if($dokters!=null){
+            return response()->json([
+                'status' => true,
+                'message' => "Login Sukses",
+                'response' => $dokters
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => "Email atau Password Salah",
+                'response' => new class{}
+            ]);
+        }
+    }
+    public function list()
+    {
+        return Dokter::all();
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -44,6 +58,7 @@ class DoktersController extends Controller
      */
     public function create()
     {
+        $this->middleware('auth');
         return view('dokter-rs/create');
     }
 
@@ -55,11 +70,12 @@ class DoktersController extends Controller
      */
     public function store(Request $request)
     {
+        $this->middleware('auth');
         $this->validateInput($request);
          Dokter::create([
             'nama' => $request['nama'],
             'email' => $request['email'],
-            'password' => bcrypt($request['password']),
+            'password' => $request['password'],
             'tempatLahir' => $request['tempatLahir'],
             'tanggalLahir' => $request['tanggalLahir'],
             'alamat'=>$request['alamat']
@@ -87,6 +103,8 @@ class DoktersController extends Controller
      */
     public function edit($id)
     {
+        $this->middleware('auth');
+
         $dokter = Dokter::find($id);
         // Redirect to user list if updating user wasn't existed
         if ($dokter == null || count($dokter) == 0) {
@@ -105,6 +123,8 @@ class DoktersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->middleware('auth');
+
         $dokter= Dokter ::findOrFail($id);
         $constraints = [
             'nama' => 'required|max:20',
@@ -137,6 +157,8 @@ class DoktersController extends Controller
      */
     public function destroy($id)
     {
+        $this->middleware('auth');
+
        Dokter::where('id', $id)->delete();
          return redirect()->intended('/dokters');
     }
@@ -182,5 +204,6 @@ class DoktersController extends Controller
         'tempatLahir' => 'required'
     ]);
     }
+
 }
 

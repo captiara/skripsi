@@ -11,15 +11,6 @@ use App\Pemeriksaan;
 
 class PemeriksaansController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -28,6 +19,7 @@ class PemeriksaansController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         $pemeriksaans = DB::table('pemeriksaans')
 
         ->leftJoin('category', 'pemeriksaans.category_id', '=', 'category.id')
@@ -47,6 +39,7 @@ class PemeriksaansController extends Controller
      */
     public function create()
     {
+        $this->middleware('auth');
         // $cities = City::all();
         // $states = State::all();
         $category = Category::all();
@@ -55,6 +48,73 @@ class PemeriksaansController extends Controller
 
         return view('pemeriksaan-rs/create', ['category' => $category, 'pasiens' => $pasiens, 'dokters' => $dokters]);
     }
+    public function getData($role, $id)
+    {
+        if($role == "dokter"){
+        $data = Pemeriksaan::select("*")->where('dokters_id',$id)->get();
+        }
+        else{
+            $data = Pemeriksaan::select("*")->where('pasiens_id',$id)->get();
+        }
+
+        if($data!=null){
+            return response()->json([
+                'status' => true,
+                'message' => "Ambil Data Berhasil",
+                'response' => $data
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => "Ambil Data Tidak Berhasil",
+                'response' => []
+            ]);
+        }
+    }
+    public function makeAppointment (Request $request)
+    {
+        $pemeriksaans = Pemeriksaan::create($request->all());
+        if($pemeriksaans != null ){
+            return response()->json([
+                'status' => true,
+                'message' => "Ambil Data Berhasil",
+                'response' => $pemeriksaans->fresh()
+            ]);
+
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => "Ambil Data Tidak Berhasil",
+                'response' => new class{}
+            ]);
+        }
+
+    }
+    public function doAppointment(Request $request){
+        $keys = ['hasil_periksa', 'resep_obat', 'treatment', 'status'];
+        $input = $this->createQueryInput($keys, $request);
+        $pemeriksaans = Pemeriksaan::where('id', $request['id'])
+            ->update($input);
+            if($pemeriksaans != null ){
+                return response()->json([
+                    'status' => true,
+                    'message' => "Terimakasih pemeriksaan Berhasil",
+                    'response' => $pemeriksaans
+                ]);
+    
+            }else{
+                return response()->json([
+                    'status' => false,
+                    'message' => "Maaf pemeriksaan gagal",
+                    'response' => new class{}
+                ]);
+            }
+    
+        
+
+    }
+
+
 
     /**
      * Store a newly created resource in storage.
@@ -64,6 +124,7 @@ class PemeriksaansController extends Controller
      */
     public function store(Request $request)
     {
+        $this->middleware('auth');
         $this->validateInput($request);
         // Upload image
        // $path = $request->file('picture')->store('avatars');
@@ -97,6 +158,7 @@ class PemeriksaansController extends Controller
      */
     public function edit($id)
     {
+        $this->middleware('auth');
         $pemeriksaan = Pemeriksaan::find($id);
         // Redirect to state list if updating state wasn't existed
         if ($pemeriksaan == null || count($pemeriksaan) == 0) {
@@ -118,6 +180,7 @@ class PemeriksaansController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->middleware('auth');
         $pemeriksaan = Pemeriksaan::findOrFail($id);
         $this->validateInput($request);
         // Upload image
@@ -142,6 +205,7 @@ class PemeriksaansController extends Controller
      */
     public function destroy($id)
     {
+        $this->middleware('auth');
          Pemeriksaan::where('id', $id)->delete();
          return redirect()->intended('/pemeriksaans');
     }
@@ -153,6 +217,7 @@ class PemeriksaansController extends Controller
      *  @return \Illuminate\Http\Response
      */
     public function search(Request $request) {
+        $this->middleware('auth');
         $constraints = [
             'pasiens.nama' => $request['pasiens_nama'],
             'dokters.nama' => $request['dokters_nama']
