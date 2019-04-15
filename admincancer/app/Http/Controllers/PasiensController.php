@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use App\Pasien;
 
 class PasiensController extends Controller
@@ -59,6 +60,47 @@ class PasiensController extends Controller
         $pasiens=Pasien::all();
         return response()->json($pasiens);
     }
+
+     /**
+     * Login.
+     *
+     */
+    public function loginPasien(Request $request)
+    {
+        $data = $request->all();
+
+        $pasien = Pasien::select('*')->where('email',$data["email"])->where('password',$request["password"])->first();
+
+        if($pasien!=null){
+            return response()->json([
+                'status' => true,
+                'message' => "Login Sukses",
+                'response' => $pasien
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => "Email atau Password Salah",
+                'response' => new class{}
+            ]);
+        }
+    }
+
+    public function registerPasien(Request $request)
+    {        
+        $pasien = Pasien::create([
+            'nama' => $request['nama'],
+            'email' => $request['email'],
+            'password' => $request["password"],
+            'tempatLahir' => $request['tempatLahir'],
+            'tanggalLahir' => $request['tanggalLahir'],
+            'alamat'=>$request['alamat'],
+            'token'=>hash('sha1', date('YmdHis'))
+        ]);
+
+        return response()->json($pasien);
+    }
+
     public function store(Request $request)
     {
         $this->validateInput($request);
