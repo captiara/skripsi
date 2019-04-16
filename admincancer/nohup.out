@@ -1,3 +1,24 @@
 Laravel development server started: <http://157.230.252.251:8001>
 Laravel development server started: <http://157.230.252.251:8002>
 Laravel development server started: <http://157.230.252.251:8002>
+Laravel development server started: <http://157.230.252.251:8002>
+[Mon Apr 15 06:57:24 2019] Failed to listen on 157.230.252.251:8002 (reason: Address already in use)
+Laravel development server started: <http://157.230.252.251:8002>
+[Mon Apr 15 06:57:36 2019] Failed to listen on 157.230.252.251:8002 (reason: Address already in use)
+Laravel development server started: <http://157.230.252.251:8002>
+[Mon Apr 15 08:45:05 2019] 103.24.56.236:62632 [200]: /bower_components/AdminLTE/bootstrap/css/bootstrap.min.css
+[Mon Apr 15 08:45:05 2019] 103.24.56.236:62633 [200]: /bower_components/AdminLTE/dist/css/AdminLTE.min.css
+[Mon Apr 15 08:45:05 2019] 103.24.56.236:62635 [200]: /bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js
+[Mon Apr 15 08:45:05 2019] 103.24.56.236:62634 [200]: /bower_components/AdminLTE/dist/css/skins/skin-blue.min.css
+[Mon Apr 15 08:45:05 2019] 103.24.56.236:62636 [200]: /bower_components/AdminLTE/bootstrap/js/bootstrap.min.js
+[Mon Apr 15 08:45:06 2019] 103.24.56.236:62637 [200]: /bower_components/AdminLTE/dist/js/app.min.js
+[Mon Apr 15 08:45:08 2019] 103.24.56.236:62638 [200]: /bower_components/AdminLTE/dist/img/user2-160x160.jpg
+[Mon Apr 15 08:45:10 2019] 103.24.56.236:62642 [200]: /bower_components/AdminLTE/dist/css/AdminLTE.min.css
+[Mon Apr 15 08:45:10 2019] 103.24.56.236:62644 [200]: /bower_components/AdminLTE/bootstrap/css/bootstrap.min.css
+[Mon Apr 15 08:45:10 2019] 103.24.56.236:62645 [200]: /bower_components/AdminLTE/dist/css/skins/skin-blue.min.css
+[Mon Apr 15 08:45:10 2019] 103.24.56.236:62647 [200]: /bower_components/AdminLTE/plugins/jQuery/jquery-2.2.3.min.js
+[Mon Apr 15 08:45:10 2019] 103.24.56.236:62648 [200]: /bower_components/AdminLTE/bootstrap/js/bootstrap.min.js
+[Mon Apr 15 08:45:10 2019] 103.24.56.236:62649 [200]: /bower_components/AdminLTE/dist/js/app.min.js
+[Mon Apr 15 08:45:13 2019] 103.24.56.236:62650 [200]: /bower_components/AdminLTE/dist/img/user2-160x160.jpg
+[Mon Apr 15 08:45:16 2019] 103.24.56.236:62656 [200]: /css/app.css
+[Mon Apr 15 08:45:16 2019] 103.24.56.236:62657 [200]: /js/app.js
