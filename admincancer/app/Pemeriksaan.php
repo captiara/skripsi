@@ -19,4 +19,21 @@ class Pemeriksaan extends Model
     * @var array
     */
     protected $guarded = [];
+
+    public function dokters()
+    {
+        return $this->belongsTo('App\Dokter','dokters_id');
+    }
+
+    public function pasiens()
+    {
+        return $this->belongsTo('App\Pasien','pasiens_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('App\Category','category_id');
+    }
+
+    
 }
