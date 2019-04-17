@@ -35,7 +35,7 @@ class CategoryController extends Controller
     }
     public function list()
     {
-        return Category::all();
+        return response()->json(Category::all());
     }
     /**
      * Store a newly created resource in storage.

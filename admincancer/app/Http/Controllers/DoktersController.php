@@ -47,9 +47,10 @@ class DoktersController extends Controller
             ]);
         }
     }
+
     public function list()
     {
-        return Dokter::all();
+        return response()->json(Dokter::all());
     }
     /**
      * Show the form for creating a new resource.
