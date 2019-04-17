@@ -51,10 +51,10 @@ class PemeriksaansController extends Controller
     public function getData($role, $id)
     {
         if($role == "dokter"){
-        $data = Pemeriksaan::select("*")->where('dokters_id',$id)->get();
+        $data = Pemeriksaan::with('pasiens','category')->select("*")->where('dokters_id',$id)->get();
         }
         else{
-            $data = Pemeriksaan::select("*")->where('pasiens_id',$id)->get();
+        $data = Pemeriksaan::with('dokters','category')->where('pasiens_id',$id)->get();
         }
 
         if($data!=null){
@@ -85,7 +85,7 @@ class PemeriksaansController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Ambil Data Tidak Berhasil",
-                'response' => new class{}
+                'response' => new stdClass()
             ]);
         }
 
@@ -106,7 +106,7 @@ class PemeriksaansController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => "Maaf pemeriksaan gagal",
-                    'response' => new class{}
+                    'response' => new stdClass()
                 ]);
             }
     
