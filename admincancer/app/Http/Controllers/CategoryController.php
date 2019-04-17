@@ -33,7 +33,7 @@ class CategoryController extends Controller
         $this->middleware('auth');
         return view('kategori-rs/create');
     }
-    public function list()
+    public function listData()
     {
         return response()->json(Category::all());
     }

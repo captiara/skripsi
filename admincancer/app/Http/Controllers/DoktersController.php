@@ -48,10 +48,11 @@ class DoktersController extends Controller
         }
     }
 
-    public function list()
+    public function listData()
     {
         return response()->json(Dokter::all());
     }
+
     /**
      * Show the form for creating a new resource.
      *
