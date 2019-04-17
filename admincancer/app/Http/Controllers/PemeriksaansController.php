@@ -85,7 +85,7 @@ class PemeriksaansController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Ambil Data Tidak Berhasil",
-                'response' => new stdClass()
+                'response' => new \stdClass()
             ]);
         }
 
@@ -106,7 +106,7 @@ class PemeriksaansController extends Controller
                 return response()->json([
                     'status' => false,
                     'message' => "Maaf pemeriksaan gagal",
-                    'response' => new stdClass()
+                    'response' => new \stdClass()
                 ]);
             }
     

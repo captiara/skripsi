@@ -43,7 +43,7 @@ class DoktersController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Email atau Password Salah",
-                'response' => new stdClass()
+                'response' => new \stdClass()
             ]);
         }
     }
