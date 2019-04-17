@@ -77,9 +77,10 @@ class PrediksisController extends Controller
         $prediksis=Prediksi::all();
         return response()->json($prediksis);
     }
+
     public function showdataapi($id)
     {
-        $prediksis=Prediksi::find($id);
+        $prediksis=Prediksi::select('*')->where('pasiens_id',$id)->first();
         return response()->json($prediksis);
     
     }
