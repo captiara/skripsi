@@ -16,8 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/prediksiurl','PrediksisController@datadisplayapi');
-Route::get('/prediksiurl/{id}','PrediksisController@showdataapi');
+Route::get('/prediksi','PrediksisController@datadisplayapi');
+Route::get('/prediksi/{id}','PrediksisController@showdataapi');
 Route::get('/pasienurl','PasiensController@dataapi');
 Route::get('/getdata','PrediksisController@postGuzzleRequest');
 Route::get('/category','CategoryController@listData');
