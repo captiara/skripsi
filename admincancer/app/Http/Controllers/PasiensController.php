@@ -81,7 +81,7 @@ class PasiensController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => "Email atau Password Salah",
-                'response' => new class{}
+                'response' => new stdClass()
             ]);
         }
     }
