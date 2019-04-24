@@ -168,7 +168,7 @@ class PemeriksaansController extends Controller
         $pasiens = Pasien::all();
         $dokters = Dokter::all();
     
-        return view('pemerisaaan-rs/edit', ['pemeriksaan' => $pemeriksaan, 'dokters' => $dokters, 'pasiens' => $pasiens, 'categories' => $categories]);
+        return view('pemeriksaan-rs/edit', ['pemeriksaan' => $pemeriksaan, 'dokters' => $dokters, 'pasiens' => $pasiens, 'categories' => $categories]);
     }
 
     /**

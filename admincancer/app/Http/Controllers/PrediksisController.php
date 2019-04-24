@@ -91,7 +91,7 @@ class PrediksisController extends Controller
              $header = array('Content-Type'=>'application/json');
              $client = new \GuzzleHttp\Client();
             try {
-             $response = $client->request('POST','http://localhost:5000/api/predict',['body'=>json_encode($request->all()), 'headers'=>$header]);
+             $response = $client->request('POST','http://157.230.252.251:8000/api/predict',['body'=>json_encode($request->all()), 'headers'=>$header]);
             }
             catch(\GuzzleHttp\Exception\ServerException $e) {
                 dd($e);
